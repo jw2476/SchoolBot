@@ -5,7 +5,8 @@ interface ClassType extends Document {
     category: string,
     teacherRole: string,
     studentRole: string,
-    host: string
+    host: string,
+    mainVC: string
 }
 
 const classSchema = new Schema({
@@ -13,7 +14,8 @@ const classSchema = new Schema({
     category: String,
     teacherRole: String,
     studentRole: String,
-    host: String
+    host: String,
+    mainVC: String
 })
 
 export const Class: Model<ClassType> = model("Class", classSchema)
