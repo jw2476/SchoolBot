@@ -22,7 +22,7 @@ client.on("message", async msg => {
         const className = msg.content.split(" ")[1]
 
         if (!msg.member.hasPermission("MANAGE_MESSAGES")) {
-            await msg.channel.send("You aren't a teacher!")
+            await msg.channel.send("You are not a teacher!")
             return
         }
 
@@ -86,7 +86,7 @@ client.on("message", async msg => {
         const className = msg.content.split(" ")[1]
 
         if (!className) {
-            await msg.channel.send("Please send your class code like !join 10x/M1")
+            await msg.channel.send("Please send your class code like `!join 10x/M1`")
             return
         }
 
@@ -116,7 +116,7 @@ client.on("message", async msg => {
             await msg.channel.send("Classroom deleted")
             return
         })
-        await msg.channel.send("You don't have a classroom yet, create one with !create")
+        await msg.channel.send("You do not have a classroom yet, create one with `!create`")
     }
 })
 client.login(process.env.TOKEN).then()
