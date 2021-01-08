@@ -6,7 +6,9 @@ interface ClassType extends Document {
     teacherRole: string,
     studentRole: string,
     host: string,
-    mainVC: string
+    mainVC: string,
+    text: string,
+    raisedHands: Array<string>
 }
 
 const classSchema = new Schema({
@@ -15,7 +17,9 @@ const classSchema = new Schema({
     teacherRole: String,
     studentRole: String,
     host: String,
-    mainVC: String
+    mainVC: String,
+    text: String,
+    raisedHands: [String]
 })
 
 export const Class: Model<ClassType> = model("Class", classSchema)
