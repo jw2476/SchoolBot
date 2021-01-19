@@ -10,7 +10,6 @@ import * as mongoose from "mongoose";
 config()
 
 const {
-    WEB_PORT,
     BOT_TOKEN
 } = process.env
 
@@ -40,7 +39,7 @@ bot.on('ready', async () => {
     await setGuild(bot)
 })
 
-http.listen(WEB_PORT, () => {
+http.listen(8000, () => {
     console.log("Web Server Running")
 })
 
