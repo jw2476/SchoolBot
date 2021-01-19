@@ -1,6 +1,7 @@
 import {Document, model, Schema, Types} from "mongoose";
 import {IStudent} from "./student";
 import {ITeacher} from "./teacher";
+import {Role} from "discord.js";
 
 export interface IClassroom extends Document {
     category: string,
@@ -8,7 +9,9 @@ export interface IClassroom extends Document {
     chat: string,
     students: Array<IStudent>,
     teachers: Array<ITeacher>,
-    code: string
+    code: string,
+    studentRole: string | Role,
+    teacherRole: string | Role
 }
 
 const classroomSchema = new Schema({
@@ -23,7 +26,9 @@ const classroomSchema = new Schema({
         type: Types.ObjectId,
         ref: "Teacher"
     }],
-    code: String
+    code: String,
+    teacherRole: String,
+    studentRole: String
 })
 
 const Classroom = model<IClassroom>("Classroom", classroomSchema)

@@ -1,11 +1,10 @@
 import {Document, model, Schema, Types} from "mongoose";
-import {IClassroom} from "./classroom";
 
 
 export interface IStudent extends Document {
     id: string,
     classrooms: [Types.ObjectId],
-    raisedHand: string
+    raisedHand: string,
 }
 
 const studentSchema = new Schema({

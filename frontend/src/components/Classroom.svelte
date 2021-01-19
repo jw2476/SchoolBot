@@ -1,11 +1,18 @@
 <div class="has-text-centered">
     <h1 class="title">{classroom.code}</h1>
-    {#each students as student}
-        student.id
-    {/each}
-    {#if error}
-        <h1 class="title">Could not get students, try reloading</h1>
-    {/if}
+    <div class="columns">
+        <div class="column is-one-third">
+            <div class="box content">
+                <h1 class="title">Students</h1>
+                <br>
+                <ul>
+                    {#each students as student}
+                        <li>{student}</li>
+                    {/each}
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -18,10 +25,12 @@
     let students = []
 
     onMount(async () => {
-        const {students} = classroom
+        const studentsDB = classroom.students
 
-        if (!students || students.error) {
-            error = true
+        for (const studentDB of studentsDB) {
+            students = [...students, await axios.get(`http://localhost:8000/api/students/${studentDB.id}/name`).then(res => res.data)] // Svelte only updates on reassignment
         }
+
+        console.log(students)
     })
 </script>

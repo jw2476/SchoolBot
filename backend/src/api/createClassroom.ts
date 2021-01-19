@@ -1,14 +1,21 @@
 import {Request, Response} from "express";
-import guild from "../guild";
 import Classroom from "../models/classroom";
 import Teacher, {ITeacher} from "../models/teacher";
-import {IStudent} from "../models/student";
 import getGuild from "../guild"
 
 export default async function (req: Request, res: Response) {
     const code = req.query.code.toString()
     const id = req.query.id.toString()
     const guild = getGuild()
+
+    const existingClassroom = await Classroom.findOne({code: code.toLowerCase()})
+
+    if (existingClassroom) {
+        res.json({
+            error: "Existing classroom with that code"
+        })
+        return;
+    }
 
     const user = await guild.members.fetch(id)
 
@@ -19,7 +26,7 @@ export default async function (req: Request, res: Response) {
 
     if (!teacher) {
         res.json({
-            error: "Not a teacher"
+            error: "You are not a teacher"
         })
         return
     }
@@ -74,7 +81,9 @@ export default async function (req: Request, res: Response) {
         chat: chat.id,
         students: [],
         teachers: [teacher._id],
-        code: code
+        code: code.toLowerCase(),
+        teacherRole: teacherRole.id,
+        studentRole: studentRole.id
     }).save()
 
     teacher.classrooms.push(classroom._id)

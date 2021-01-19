@@ -17,8 +17,6 @@
 <script>
     import {onMount} from "svelte";
 
-    export let socket
-
     const params = new URLSearchParams(location.search)
     const code = params.get("code")
 

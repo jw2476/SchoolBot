@@ -28,10 +28,11 @@
     let classrooms = []
 
     onMount(async () => {
-        classrooms = await axios.get(`http://localhost:8000/api/teachers/${localStorage.getItem("id")}/classrooms`).then(res => res.data).catch(console.error)
+        classrooms = await axios.get(`http://localhost:8000/api/teachers/${localStorage.getItem("id")}/classrooms`).then(res => res.data).catch(err => { console.error(err); return []})
 
         if (!classrooms || classrooms.error) {
             error = true
+            classrooms = []
         } else {
             console.log(classrooms)
         }

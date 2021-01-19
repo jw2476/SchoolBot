@@ -1,6 +1,13 @@
 <script>
     import CreateClassroom from "./CreateClassroom.svelte";
+    import {type} from "../stores"
+    import JoinClassroom from "./JoinClassroom.svelte";
+
+    let userType
+
+    type.subscribe(value => userType = value)
 </script>
+
 <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -17,7 +24,11 @@
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
-                    <CreateClassroom/>
+                    {#if userType === "teacher"}
+                        <CreateClassroom/>
+                    {:else if userType === "student"}
+                        <JoinClassroom/>
+                    {/if}
                 </div>
             </div>
         </div>
