@@ -15,6 +15,8 @@
 </section>
 
 <script>
+    import {onMount} from "svelte";
+
     export let socket
 
     const params = new URLSearchParams(location.search)
@@ -22,14 +24,19 @@
 
     let login, error
 
-    socket.on("authenticateError", () => error = true)
-    socket.on("authenticateSuccess", response => {
-        localStorage.setItem("token", response.token)
-    })
+    onMount(async () => {
+        if (!code) {
+            login = true
+        } else {
+            const auth = await fetch(`http://localhost:8000/api/auth?code=${code}`).then(res => res.json()).catch(err => {console.error(err)})
 
-    if (!code) {
-        login = true
-    } else {
-        socket.emit("authenticate", code)
-    }
+            if (!auth || auth.error) {
+                error = true
+            }  else {
+                localStorage.setItem("token", auth.token)
+                localStorage.setItem("name", auth.user.username)
+                localStorage.setItem("id", auth.user.id)
+            }
+        }
+    })
 </script>

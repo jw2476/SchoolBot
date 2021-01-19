@@ -1,12 +1,13 @@
 <script>
-    import {io} from "socket.io-client"
     import Login from "./components/Login.svelte";
-
-    const socket = io("http://localhost:8000/")
+    import CreateClassroom from "./components/CreateClassroom.svelte";
+    import Navbar from "./components/Navbar.svelte";
 </script>
 
 <main>
     {#if !localStorage.getItem("token")}
-        <Login {socket}/>
+        <Login/>
+    {:else}
+        <Navbar/>
     {/if}
 </main>

@@ -1,6 +1,8 @@
 import {Socket} from "socket.io";
 import axios from "axios"
 import {config} from "dotenv";
+import { User } from "discord.js";
+import {Request, Response} from "express";
 
 config()
 
@@ -9,7 +11,9 @@ const {
     CLIENT_SECRET
 } = process.env
 
-export async function authenticate(socket: Socket, code: string) {
+export async function auth(req: Request, res: Response) {
+    const code = req.query.code.toString()
+
     const params = new URLSearchParams({
         client_id: CLIENT_ID,
         client_secret: CLIENT_SECRET,
@@ -24,10 +28,26 @@ export async function authenticate(socket: Socket, code: string) {
     console.log(token)
 
     if (!token) {
-        socket.emit("authenticateError", "Bad Code")
+        res.json({
+            error: "Bad Code"
+        })
+        return
+    }
+
+    const headers = {
+        Authorization: `Bearer ${token}`
+    }
+
+    const user = await axios.get("https://discord.com/api/users/@me", {headers}).then(res => res.data as User).catch(err => {console.error(err); return})
+
+    if (!user) {
+        res.json({
+            error: "No User"
+        })
     } else {
-        socket.emit("authenticateSuccess", {
-            token
+        res.json({
+            token,
+            user
         })
     }
 }
