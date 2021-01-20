@@ -6,6 +6,7 @@ import api from "./api";
 import {Client} from "discord.js";
 import {setGuild} from "./guild";
 import * as mongoose from "mongoose";
+import Student from "./models/student";
 
 config()
 
@@ -37,6 +38,12 @@ io.on("connection", (socket: Socket) => {
 bot.on('ready', async () => {
     console.log("Bot Connected!")
     await setGuild(bot)
+})
+
+bot.on('guildMemberAdd', async member => {
+    await new Student({
+        id: member.user.id
+    }).save()
 })
 
 http.listen(8000, () => {

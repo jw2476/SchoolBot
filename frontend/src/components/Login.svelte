@@ -34,6 +34,7 @@
                 localStorage.setItem("token", auth.token)
                 localStorage.setItem("name", auth.user.username)
                 localStorage.setItem("id", auth.user.id)
+                location.reload()
             }
         }
     })
