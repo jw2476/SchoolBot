@@ -1,7 +1,7 @@
 <section class="section">
     <div class="container has-text-centered">
         {#if login}
-            <h1 class="title">Press to button below to login</h1>
+            <h1 class="title">Press the button below to login</h1>
             <a href={`https://discord.com/api/oauth2/authorize?client_id=796713070750990368&redirect_uri=${redirectURI}&response_type=code&scope=identify`}>
                 <button class="is-large is-primary button">Login</button>
             </a>
