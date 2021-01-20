@@ -2,7 +2,7 @@
     <div class="container has-text-centered">
         {#if login}
             <h1 class="title">Press to button below to login</h1>
-            <a href="https://discord.com/api/oauth2/authorize?client_id=796713070750990368&redirect_uri=http%3A%2F%2Flocalhost%3A5000&response_type=code&scope=identify">
+            <a href={`https://discord.com/api/oauth2/authorize?client_id=796713070750990368&redirect_uri=${redirectURI}&response_type=code&scope=identify`}>
                 <button class="is-large is-primary button">Login</button>
             </a>
         {:else if error}
@@ -20,6 +20,7 @@
 
     const params = new URLSearchParams(location.search)
     const code = params.get("code")
+    const redirectURI = encodeURIComponent(location.protocol + '//' + location.host + location.pathname.slice(location.pathname.length))
 
     let login, error
 

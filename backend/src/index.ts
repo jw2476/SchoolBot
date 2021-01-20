@@ -11,7 +11,8 @@ import Student from "./models/student";
 config()
 
 const {
-    BOT_TOKEN
+    BOT_TOKEN,
+    WEB_PORT
 } = process.env
 
 mongoose.connect("mongodb://localhost:27017/school", { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
@@ -46,8 +47,8 @@ bot.on('guildMemberAdd', async member => {
     }).save()
 })
 
-http.listen(8000, () => {
-    console.log("Web Server Running")
+http.listen(WEB_PORT, () => {
+    console.log(`Web Server Running on port ${WEB_PORT}`)
 })
 
 bot.login(BOT_TOKEN)
