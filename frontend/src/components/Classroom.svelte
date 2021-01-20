@@ -1,16 +1,14 @@
-<div class="has-text-centered">
-    <h1 class="title">{classroom.code}</h1>
-    <div class="columns">
-        <div class="column is-one-third">
-            <div class="box content">
-                <h1 class="title">Students</h1>
-                <br>
-                <ul>
-                    {#each students as student}
-                        <li>{student}</li>
-                    {/each}
-                </ul>
-            </div>
+<h1 class="title has-text-centered">{classroom.code}</h1>
+<div class="columns">
+    <div class="column is-one-third">
+        <div class="box content">
+            <h1 class="title has-text-centered">Students</h1>
+            <br>
+            <ul>
+                {#each students as student}
+                    <li>{student}</li>
+                {/each}
+            </ul>
         </div>
     </div>
 </div>

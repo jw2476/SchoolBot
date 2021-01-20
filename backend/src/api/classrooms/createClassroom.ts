@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
-import Classroom from "../models/classroom";
-import Teacher, {ITeacher} from "../models/teacher";
-import getGuild from "../guild"
+import Classroom from "../../models/classroom";
+import Teacher, {ITeacher} from "../../models/teacher";
+import getGuild from "../../guild"
 
 export default async function (req: Request, res: Response) {
     const code = req.query.code.toString()

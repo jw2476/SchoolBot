@@ -43,10 +43,13 @@
 
             if (response.error) {
                 reason = response.error
+                loading = false
+                modal = false
+                code = ""
+            } else {
+                location.reload()
             }
-            loading = false
-            modal = false
-            code = ""
+
         }
     }
 </script>

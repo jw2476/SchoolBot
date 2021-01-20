@@ -2,14 +2,24 @@
     {#if !selectedClassroom}
         <div class="columns">
             {#each classrooms as classroom}
-                <div class="box has-text-centered column is-one-third" id="classroom">
-                    <h1 class="title">{classroom.code}</h1>
-                    <button class="button is-primary" on:click={() => selectedClassroom = classroom}>Enter</button>
+                <div class="column is-one-third">
+                    <article class="message is-primary">
+                        <div class="message-header">
+                            <p>{classroom.code}</p>
+                            {#if userType === "teacher"}
+                                <DeleteClassroom classroom={classroom}/>
+                            {/if}
+                        </div>
+                        <div class="message-body has-text-centered">
+                            <button class="button is-primary" on:click={() => selectedClassroom=classroom}>Enter
+                            </button>
+                        </div>
+                    </article>
                 </div>
             {/each}
         </div>
     {:else}
-        <Classroom classroom={selectedClassroom} id/>
+        <Classroom classroom={selectedClassroom}/>
     {/if}
     {#if error}
         <div class="container has-text-centered">
@@ -23,12 +33,20 @@
     import axios from "axios"
     import {onMount} from "svelte";
     import Classroom from "./Classroom.svelte";
+    import {type} from "../stores";
+    import DeleteClassroom from "./DeleteClassroom.svelte";
 
     let error, selectedClassroom
     let classrooms = []
+    let userType
+
+    type.subscribe(value => userType = value)
 
     onMount(async () => {
-        classrooms = await axios.get(`http://localhost:8000/api/teachers/${localStorage.getItem("id")}/classrooms`).then(res => res.data).catch(err => { console.error(err); return []})
+        classrooms = await axios.get(`http://localhost:8000/api/${userType}s/${localStorage.getItem("id")}/classrooms`).then(res => res.data).catch(err => {
+            console.error(err);
+            return []
+        })
 
         if (!classrooms || classrooms.error) {
             error = true
