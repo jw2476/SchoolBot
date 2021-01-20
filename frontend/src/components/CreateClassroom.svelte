@@ -27,7 +27,7 @@
 </div>
 
 <script>
-    import axios from "axios";
+    import {axios} from "../const";
 
     let modal, code, noCode, loading, error
     let reason = ""
@@ -39,7 +39,7 @@
             noCode = false
             loading = true
 
-            const response = await axios.post(`http://localhost:8000/api/classrooms?code=${code}&id=${localStorage.getItem("id")}`).then(res => res.data).catch(console.error)
+            const response = await axios.post(`/api/classrooms?code=${code}&id=${localStorage.getItem("id")}`).then(res => res.data).catch(console.error)
 
             if (response.error) {
                 reason = response.error

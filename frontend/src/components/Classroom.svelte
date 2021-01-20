@@ -42,8 +42,8 @@
 
 <script>
     import {onMount} from "svelte";
-    import axios from "axios";
-    import {type} from "../stores";
+    import {axios} from "../const";
+    import {type} from "../const";
 
     export let classroom;
 
@@ -58,7 +58,7 @@
         const studentsDB = classroom.students
 
         for (const studentDB of studentsDB) {
-            students = [...students, await axios.get(`http://localhost:8000/api/students/${studentDB.id}/name`).then(res => res.data)] // Svelte only updates on reassignment
+            students = [...students, await axios.get(`/api/students/${studentDB.id}/name`).then(res => res.data)] // Svelte only updates on reassignment
         }
 
         console.log(students)
@@ -83,7 +83,7 @@
 
         amountError = false
         loading = true
-        await axios.post(`http://localhost:8000/api/classrooms/${classroom._id}/${tableMode ? "merge" : "split"}`, {amount: amountInt})
+        await axios.post(`/api/classrooms/${classroom._id}/${tableMode ? "merge" : "split"}`, {amount: amountInt})
         loading = false
         modal = false
         tableMode = !tableMode

@@ -31,6 +31,8 @@ BOT_TOKEN: The token of the Discord bot
 
 ```shell
 cd frontend
+cp .env.example .env # Make a copy of the .env file to store secrets
+nano .env # Edit the .env file adding the base URL of the backend server, this is usually http://localhost:8000
 yarn # Install dependencies
 yarn dev # Run
 ```

@@ -15,14 +15,14 @@
 </div>
 
 <script>
-    import axios from "axios";
+    import {axios} from "../const";
 
     let modal, loading
     export let classroom
 
     async function deleteClassroom() {
         loading = true
-        await axios.delete(`http://localhost:8000/api/classrooms/${classroom._id}`)
+        await axios.delete(`/api/classrooms/${classroom._id}`)
         location.reload()
     }
 </script>

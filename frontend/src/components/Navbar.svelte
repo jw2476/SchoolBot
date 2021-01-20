@@ -1,6 +1,6 @@
 <script>
     import CreateClassroom from "./CreateClassroom.svelte";
-    import {type} from "../stores"
+    import {type} from "../const"
     import JoinClassroom from "./JoinClassroom.svelte";
 
     let userType

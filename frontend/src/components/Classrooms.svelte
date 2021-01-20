@@ -30,10 +30,10 @@
 
 
 <script>
-    import axios from "axios"
+    import {axios} from "../const"
     import {onMount} from "svelte";
     import Classroom from "./Classroom.svelte";
-    import {type} from "../stores";
+    import {type} from "../const";
     import DeleteClassroom from "./DeleteClassroom.svelte";
 
     let error, selectedClassroom
@@ -43,7 +43,7 @@
     type.subscribe(value => userType = value)
 
     onMount(async () => {
-        classrooms = await axios.get(`http://localhost:8000/api/${userType}s/${localStorage.getItem("id")}/classrooms`).then(res => res.data).catch(err => {
+        classrooms = await axios.get(`/api/${userType}s/${localStorage.getItem("id")}/classrooms`).then(res => res.data).catch(err => {
             console.error(err);
             return []
         })

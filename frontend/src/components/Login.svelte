@@ -16,6 +16,7 @@
 
 <script>
     import {onMount} from "svelte";
+    import {axios} from "../const";
 
     const params = new URLSearchParams(location.search)
     const code = params.get("code")
@@ -26,7 +27,7 @@
         if (!code) {
             login = true
         } else {
-            const auth = await fetch(`http://localhost:8000/api/auth?code=${code}`).then(res => res.json()).catch(err => {console.error(err)})
+            const auth = await axios.get(`/api/auth?code=${code}`).then(res => res.data)
 
             if (!auth || auth.error) {
                 error = true

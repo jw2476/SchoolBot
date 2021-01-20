@@ -36,7 +36,7 @@
 </div>
 
 <script>
-    import axios from "axios";
+    import {axios} from "../const";
 
     const id = localStorage.getItem("id")
 
@@ -46,7 +46,7 @@
         if (username && password) {
             loading = true
 
-            const result = await axios.post(`http://localhost:8000/api/students/${id}/joinClassrooms`, {
+            const result = await axios.post(`/api/students/${id}/joinClassrooms`, {
                 username,
                 password
             }).then(res => res.data).catch(console.error)
