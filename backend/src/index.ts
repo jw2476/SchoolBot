@@ -12,10 +12,11 @@ config()
 
 const {
     BOT_TOKEN,
-    WEB_PORT
+    WEB_PORT,
+    DB_URI
 } = process.env
 
-mongoose.connect("mongodb://localhost:27017/school", { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+mongoose.connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
     console.log("DB Connected!")
 })
 
