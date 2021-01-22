@@ -7,7 +7,7 @@ import classrooms from "./classrooms";
 
 const router = Router()
 
-router.get("/auth", auth)
+router.post("/auth", auth)
 router.get("/:id/type", getUserType)
 
 router.use("/classrooms", classrooms)

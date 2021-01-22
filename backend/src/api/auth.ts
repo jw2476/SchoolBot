@@ -12,14 +12,15 @@ const {
 } = process.env
 
 export async function auth(req: Request, res: Response) {
-    const code = req.query.code.toString()
+    const code = req.body.code
+    const uri = req.body.uri
 
     const params = new URLSearchParams({
         client_id: CLIENT_ID,
         client_secret: CLIENT_SECRET,
         grant_type: "authorization_code",
         code,
-        redirect_uri: "http://localhost:5000",
+        redirect_uri: uri,
         scope: "identify"
     })
 

@@ -16,7 +16,8 @@ const {
     BOT_TOKEN,
     WEB_PORT,
     DB_URI,
-    HTTPS
+    HTTPS,
+    LOCAL_FRONTEND
 } = process.env
 
 mongoose.connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
@@ -49,6 +50,10 @@ const bot = new Client()
 app.use(require("body-parser").json())
 app.use(require("cors")())
 app.use("/api", api)
+
+if (LOCAL_FRONTEND == "true") {
+    app.use(express.static(__dirname + "/../../frontend/public"))
+}
 
 io.on("connection", (socket: Socket) => {
     console.log("Socket Connected")
