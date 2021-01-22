@@ -28,7 +28,7 @@
         if (!code) {
             login = true
         } else {
-            const auth = await axios.post(`/api/auth}`, {code: code, uri: redirectURI}).then(res => res.data)
+            const auth = await axios.post(`/api/auth`, {code: code, uri: redirectURI}).then(res => res.data)
 
             if (!auth || auth.error) {
                 error = true
