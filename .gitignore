@@ -1,6 +1,6 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/node,webstorm+all,vscode
-# Edit at https://www.toptal.com/developers/gitignore?templates=node,webstorm+all,vscode
+# Created by https://www.toptal.com/developers/gitignore/api/node,webstorm+all,vscode,web
+# Edit at https://www.toptal.com/developers/gitignore?templates=node,webstorm+all,vscode,web
 
 ### Node ###
 # Logs
@@ -210,4 +210,7 @@ modules.xml
 # Sonarlint plugin
 .idea/sonarlint
 
-# End of https://www.toptal.com/developers/gitignore/api/node,webstorm+all,vscode
+# End of https://www.toptal.com/developers/gitignore/api/node,webstorm+all,vscode,web
+
+selfsigned.key
+selfsigned.crt
