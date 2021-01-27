@@ -27,6 +27,10 @@ GUILD_ID: The ID of the Discord server/ guild you want to bot to be in
 
 BOT_TOKEN: The token of the Discord bot
 
+HTTPS: Run website with HTTPS (Not Working Properly)
+
+LOCAL_FRONTENT: Run frontend and backend under one website, frontend will need to be build seperatly with yarn build
+
 ## Frontend
 
 ```shell

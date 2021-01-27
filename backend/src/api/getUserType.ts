@@ -5,23 +5,11 @@ import Teacher from "../models/teacher";
 export default async (req: Request, res: Response) => {
     const id = req.params.id
 
-    const student = await Student.findOne({id: id}, (err, student) => {
-        if (err) {
-            console.error(err);
-            return
-        }
-        return student
-    })
-
+    const student = await Student.findOne({id: id})
     if (student) { res.send("student"); return }
 
-    const teacher = await Teacher.findOne({id: id}, (err, teacher) => {
-        if (err) {
-            console.error(err);
-            return
-        }
-        return teacher
-    })
-
+    const teacher = await Teacher.findOne({id: id})
     if (teacher) { res.send("teacher"); return }
+
+    res.send("")
 }
